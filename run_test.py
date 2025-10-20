@@ -32,12 +32,16 @@ def run_verification_tests() -> None:
     print("=" * 80)
     print()
     
-    # Create temporary directory for test images
+    # Create directory for test images
     with tempfile.TemporaryDirectory() as temp_dir:
         
         # Test A: Cap Check (> 20000 pixels → Q1 = 100)
         print("TEST A: Cap Check")
         print("-" * 40)
+        
+        temp_dir = "test_outputs"
+        os.makedirs(temp_dir, exist_ok=True)
+        
         test_a_path = os.path.join(temp_dir, "test_a_cap.bmp")
         create_test_image(200, 200, 25000, test_a_path)  # > 20000 pixels
         q1_a, pixels_a = calculate_q1(test_a_path)
@@ -180,3 +184,4 @@ if __name__ == "__main__":
     
     # Uncomment the line below to test with a real image
     # test_with_real_image("path/to/your/image.bmp")
+    test_with_real_image("test_images/hand_sample.png")
